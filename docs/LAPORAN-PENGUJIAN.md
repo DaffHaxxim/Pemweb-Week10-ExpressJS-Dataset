@@ -3,7 +3,7 @@
 Laporan ini dihasilkan otomatis oleh `npm run evidence` (`scripts/evidence.js`). Setiap request dikirim ke server ExpressJS
 yang berjalan sungguhan, dan isi tabel `products` dibaca langsung dari PostgreSQL (`SELECT` melalui Prisma) sebelum dan sesudah request.
 
-- Dijalankan pada: 2026-11-07T13:20:14.259Z
+- Dijalankan pada: 2026-11-07T13:37:19.422Z
 - Stack: Node.js v22.23.4, Express 5, Prisma 7, PostgreSQL 16
 - **Hasil: 18 dari 18 skenario lulus**
 
@@ -36,15 +36,17 @@ Tabel `products` dikosongkan (`TRUNCATE ... RESTART IDENTITY`) lalu diisi tiga b
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
 ## 3. Detail skenario (request, response, perubahan database)
 
 ### S01 — GET semua produk (sukses)
+
+![S01](evidence/S01.png)
 
 **Request**
 ```bash
@@ -58,22 +60,22 @@ curl -i -X GET http://localhost:3000/products
     "id": 1,
     "name": "Buku Tulis",
     "price": 5000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   },
   {
     "id": 2,
     "name": "Pulpen",
     "price": 3000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   },
   {
     "id": 3,
     "name": "Spidol",
     "price": 8000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   }
 ]
 ```
@@ -81,6 +83,8 @@ curl -i -X GET http://localhost:3000/products
 ---
 
 ### S02 — GET produk berdasarkan id (sukses)
+
+![S02](evidence/S02.png)
 
 **Request**
 ```bash
@@ -93,14 +97,16 @@ curl -i -X GET http://localhost:3000/products/2
   "id": 2,
   "name": "Pulpen",
   "price": 3000,
-  "createdAt": "2026-11-07T13:20:13.580Z",
-  "updatedAt": "2026-11-07T13:20:13.580Z"
+  "createdAt": "2026-11-07T13:37:18.472Z",
+  "updatedAt": "2026-11-07T13:37:18.472Z"
 }
 ```
 
 ---
 
 ### S03 — GET produk dengan id yang tidak ada
+
+![S03](evidence/S03.png)
 
 **Request**
 ```bash
@@ -117,6 +123,8 @@ curl -i -X GET http://localhost:3000/products/9999
 ---
 
 ### S04 — GET produk dengan id bukan angka
+
+![S04](evidence/S04.png)
 
 **Request**
 ```bash
@@ -137,6 +145,8 @@ curl -i -X GET http://localhost:3000/products/abc
 
 ### S05 — POST produk baru (sukses)
 
+![S05](evidence/S05.png)
+
 **Request**
 ```bash
 curl -i -X POST http://localhost:3000/products \
@@ -150,8 +160,8 @@ curl -i -X POST http://localhost:3000/products \
   "id": 4,
   "name": "Penghapus",
   "price": 2000,
-  "createdAt": "2026-11-07T13:20:13.903Z",
-  "updatedAt": "2026-11-07T13:20:13.903Z"
+  "createdAt": "2026-11-07T13:37:19.020Z",
+  "updatedAt": "2026-11-07T13:37:19.020Z"
 }
 ```
 
@@ -159,9 +169,9 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
@@ -169,16 +179,18 @@ _(3 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S06 — POST tanpa field name (validasi gagal)
+
+![S06](evidence/S06.png)
 
 **Request**
 ```bash
@@ -201,10 +213,10 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -212,16 +224,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S07 — POST dengan price berupa teks (validasi gagal)
+
+![S07](evidence/S07.png)
 
 **Request**
 ```bash
@@ -244,10 +258,10 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -255,16 +269,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S08 — POST dengan price negatif dan name kosong (dua kesalahan sekaligus)
+
+![S08](evidence/S08.png)
 
 **Request**
 ```bash
@@ -288,10 +304,10 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -299,16 +315,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S09 — POST dengan body bukan JSON valid
+
+![S09](evidence/S09.png)
 
 **Request**
 ```bash
@@ -328,10 +346,10 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -339,16 +357,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S10 — PUT mengubah produk (sukses)
+
+![S10](evidence/S10.png)
 
 **Request**
 ```bash
@@ -363,8 +383,8 @@ curl -i -X PUT http://localhost:3000/products \
   "id": 4,
   "name": "Penghapus Besar",
   "price": 2500,
-  "createdAt": "2026-11-07T13:20:13.903Z",
-  "updatedAt": "2026-11-07T13:20:13.935Z"
+  "createdAt": "2026-11-07T13:37:19.020Z",
+  "updatedAt": "2026-11-07T13:37:19.061Z"
 }
 ```
 
@@ -372,10 +392,10 @@ curl -i -X PUT http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus | 2000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus | 2000 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -383,16 +403,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S11 — PUT tanpa id (validasi gagal)
+
+![S11](evidence/S11.png)
 
 **Request**
 ```bash
@@ -415,10 +437,10 @@ curl -i -X PUT http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -426,16 +448,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S12 — PUT dengan id yang tidak ada
+
+![S12](evidence/S12.png)
 
 **Request**
 ```bash
@@ -455,10 +479,10 @@ curl -i -X PUT http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -466,16 +490,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S13 — PUT dengan name/price tidak valid
+
+![S13](evidence/S13.png)
 
 **Request**
 ```bash
@@ -499,10 +525,10 @@ curl -i -X PUT http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -510,16 +536,18 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S14 — DELETE produk (sukses)
+
+![S14](evidence/S14.png)
 
 **Request**
 ```bash
@@ -534,8 +562,8 @@ curl -i -X DELETE http://localhost:3000/products/4
     "id": 4,
     "name": "Penghapus Besar",
     "price": 2500,
-    "createdAt": "2026-11-07T13:20:13.903Z",
-    "updatedAt": "2026-11-07T13:20:13.935Z"
+    "createdAt": "2026-11-07T13:37:19.020Z",
+    "updatedAt": "2026-11-07T13:37:19.061Z"
   }
 }
 ```
@@ -544,10 +572,10 @@ curl -i -X DELETE http://localhost:3000/products/4
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 4 | Penghapus Besar | 2500 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 4 | Penghapus Besar | 2500 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -555,15 +583,17 @@ _(4 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
 ---
 
 ### S15 — DELETE produk yang sudah terhapus / tidak ada
+
+![S15](evidence/S15.png)
 
 **Request**
 ```bash
@@ -581,9 +611,9 @@ curl -i -X DELETE http://localhost:3000/products/4
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
@@ -591,15 +621,17 @@ _(3 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
 ---
 
 ### S16 — DELETE dengan id tidak valid
+
+![S16](evidence/S16.png)
 
 **Request**
 ```bash
@@ -620,9 +652,9 @@ curl -i -X DELETE http://localhost:3000/products/-1
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
@@ -630,15 +662,17 @@ _(3 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
 ---
 
 ### S17 — Uji restart — langkah 1: POST produk baru
+
+![S17](evidence/S17.png)
 
 **Request**
 ```bash
@@ -653,8 +687,8 @@ curl -i -X POST http://localhost:3000/products \
   "id": 5,
   "name": "Produk Uji Restart",
   "price": 12345,
-  "createdAt": "2026-11-07T13:20:13.976Z",
-  "updatedAt": "2026-11-07T13:20:13.976Z"
+  "createdAt": "2026-11-07T13:37:19.131Z",
+  "updatedAt": "2026-11-07T13:37:19.131Z"
 }
 ```
 
@@ -662,9 +696,9 @@ curl -i -X POST http://localhost:3000/products \
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
 
 _(3 baris)_
 
@@ -672,16 +706,18 @@ _(3 baris)_
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 5 | Produk Uji Restart | 12345 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 5 | Produk Uji Restart | 12345 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
 ---
 
 ### S18 — Uji restart — langkah 2: GET setelah server dimulai ulang
+
+![S18](evidence/S18.png)
 
 **Request**
 ```bash
@@ -695,29 +731,29 @@ curl -i -X GET http://localhost:3000/products
     "id": 1,
     "name": "Buku Tulis",
     "price": 5000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   },
   {
     "id": 2,
     "name": "Pulpen",
     "price": 3000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   },
   {
     "id": 3,
     "name": "Spidol",
     "price": 8000,
-    "createdAt": "2026-11-07T13:20:13.580Z",
-    "updatedAt": "2026-11-07T13:20:13.580Z"
+    "createdAt": "2026-11-07T13:37:18.472Z",
+    "updatedAt": "2026-11-07T13:37:18.472Z"
   },
   {
     "id": 5,
     "name": "Produk Uji Restart",
     "price": 12345,
-    "createdAt": "2026-11-07T13:20:13.976Z",
-    "updatedAt": "2026-11-07T13:20:13.976Z"
+    "createdAt": "2026-11-07T13:37:19.131Z",
+    "updatedAt": "2026-11-07T13:37:19.131Z"
   }
 ]
 ```
@@ -741,10 +777,10 @@ Isi tabel `products` di PostgreSQL pada akhir pengujian:
 
 | id | name | price | created_at | updated_at |
 |---|---|---|---|---|
-| 1 | Buku Tulis | 5000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 2 | Pulpen | 3000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 3 | Spidol | 8000 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
-| 5 | Produk Uji Restart | 12345 | 2026-11-07 13:20:13 | 2026-11-07 13:20:13 |
+| 1 | Buku Tulis | 5000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 2 | Pulpen | 3000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 3 | Spidol | 8000 | 2026-11-07 13:37:18 | 2026-11-07 13:37:18 |
+| 5 | Produk Uji Restart | 12345 | 2026-11-07 13:37:19 | 2026-11-07 13:37:19 |
 
 _(4 baris)_
 
@@ -763,6 +799,7 @@ Urutan operasi: data awal → POST → PUT → DELETE → POST produk uji → re
 
 ## 6. Catatan
 
-- Screenshot Postman/Bruno/Hoppscotch tidak dapat diambil dari lingkungan otomatis ini. Koleksi siap impor tersedia di
-  `docs/postman_collection.json` untuk melengkapi bukti tersebut; isi request/response di atas berasal dari server yang sama.
+- Gambar `docs/evidence/Sxx.png` adalah **render otomatis** (`scripts/render-images.js`) dari data request/response/database
+  yang direkam `scripts/evidence.js` saat server berjalan. Gambar tersebut bukan tangkapan layar Postman/Bruno/Hoppscotch.
+  Koleksi siap impor tersedia di `docs/postman_collection.json` bila pengajar mewajibkan tangkapan layar dari aplikasi tersebut.
 - Tes otomatis: `npm test` (27 pengujian, termasuk uji restart).

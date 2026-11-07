@@ -1,0 +1,1091 @@
+[
+  {
+    "id": "S01",
+    "title": "GET semua produk (sukses)",
+    "method": "GET",
+    "path": "/products",
+    "status": 200,
+    "expectStatus": 200,
+    "ok": true,
+    "json": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      }
+    ],
+    "before": null,
+    "after": null
+  },
+  {
+    "id": "S02",
+    "title": "GET produk berdasarkan id (sukses)",
+    "method": "GET",
+    "path": "/products/2",
+    "status": 200,
+    "expectStatus": 200,
+    "ok": true,
+    "json": {
+      "id": 2,
+      "name": "Pulpen",
+      "price": 3000,
+      "createdAt": "2026-11-07T13:37:18.472Z",
+      "updatedAt": "2026-11-07T13:37:18.472Z"
+    },
+    "before": null,
+    "after": null
+  },
+  {
+    "id": "S03",
+    "title": "GET produk dengan id yang tidak ada",
+    "method": "GET",
+    "path": "/products/9999",
+    "status": 404,
+    "expectStatus": 404,
+    "ok": true,
+    "json": {
+      "error": "Produk dengan id 9999 tidak ditemukan"
+    },
+    "before": null,
+    "after": null
+  },
+  {
+    "id": "S04",
+    "title": "GET produk dengan id bukan angka",
+    "method": "GET",
+    "path": "/products/abc",
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "id harus berupa bilangan bulat positif"
+      ]
+    },
+    "before": null,
+    "after": null
+  },
+  {
+    "id": "S05",
+    "title": "POST produk baru (sukses)",
+    "method": "POST",
+    "path": "/products",
+    "body": {
+      "name": "Penghapus",
+      "price": 2000
+    },
+    "status": 201,
+    "expectStatus": 201,
+    "ok": true,
+    "json": {
+      "id": 4,
+      "name": "Penghapus",
+      "price": 2000,
+      "createdAt": "2026-11-07T13:37:19.020Z",
+      "updatedAt": "2026-11-07T13:37:19.020Z"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ]
+  },
+  {
+    "id": "S06",
+    "title": "POST tanpa field name (validasi gagal)",
+    "method": "POST",
+    "path": "/products",
+    "body": {
+      "price": 2000
+    },
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "name wajib diisi dan berupa teks tidak kosong"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ]
+  },
+  {
+    "id": "S07",
+    "title": "POST dengan price berupa teks (validasi gagal)",
+    "method": "POST",
+    "path": "/products",
+    "body": {
+      "name": "Penggaris",
+      "price": "abc"
+    },
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "price wajib diisi dan berupa bilangan bulat"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ]
+  },
+  {
+    "id": "S08",
+    "title": "POST dengan price negatif dan name kosong (dua kesalahan sekaligus)",
+    "method": "POST",
+    "path": "/products",
+    "body": {
+      "name": "",
+      "price": -100
+    },
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "name wajib diisi dan berupa teks tidak kosong",
+        "price harus antara 0 dan 2147483647"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ]
+  },
+  {
+    "id": "S09",
+    "title": "POST dengan body bukan JSON valid",
+    "method": "POST",
+    "path": "/products",
+    "rawBody": "{\"name\": \"Rusak\", price: }",
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Body bukan JSON yang valid"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ]
+  },
+  {
+    "id": "S10",
+    "title": "PUT mengubah produk (sukses)",
+    "method": "PUT",
+    "path": "/products",
+    "body": {
+      "id": 4,
+      "name": "Penghapus Besar",
+      "price": 2500
+    },
+    "status": 200,
+    "expectStatus": 200,
+    "ok": true,
+    "json": {
+      "id": 4,
+      "name": "Penghapus Besar",
+      "price": 2500,
+      "createdAt": "2026-11-07T13:37:19.020Z",
+      "updatedAt": "2026-11-07T13:37:19.061Z"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus",
+        "price": 2000,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.020Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ]
+  },
+  {
+    "id": "S11",
+    "title": "PUT tanpa id (validasi gagal)",
+    "method": "PUT",
+    "path": "/products",
+    "body": {
+      "name": "Tanpa Id",
+      "price": 1000
+    },
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "id wajib diisi dan berupa bilangan bulat positif"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ]
+  },
+  {
+    "id": "S12",
+    "title": "PUT dengan id yang tidak ada",
+    "method": "PUT",
+    "path": "/products",
+    "body": {
+      "id": 9999,
+      "name": "Hantu",
+      "price": 1000
+    },
+    "status": 404,
+    "expectStatus": 404,
+    "ok": true,
+    "json": {
+      "error": "Produk dengan id 9999 tidak ditemukan"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ]
+  },
+  {
+    "id": "S13",
+    "title": "PUT dengan name/price tidak valid",
+    "method": "PUT",
+    "path": "/products",
+    "body": {
+      "id": 4,
+      "name": 123,
+      "price": 12.5
+    },
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "name wajib diisi dan berupa teks tidak kosong",
+        "price wajib diisi dan berupa bilangan bulat"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ]
+  },
+  {
+    "id": "S14",
+    "title": "DELETE produk (sukses)",
+    "method": "DELETE",
+    "path": "/products/4",
+    "status": 200,
+    "expectStatus": 200,
+    "ok": true,
+    "json": {
+      "message": "Produk dengan id 4 berhasil dihapus",
+      "product": {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "createdAt": "2026-11-07T13:37:19.020Z",
+        "updatedAt": "2026-11-07T13:37:19.061Z"
+      }
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 4,
+        "name": "Penghapus Besar",
+        "price": 2500,
+        "created_at": "2026-11-07T13:37:19.020Z",
+        "updated_at": "2026-11-07T13:37:19.061Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ]
+  },
+  {
+    "id": "S15",
+    "title": "DELETE produk yang sudah terhapus / tidak ada",
+    "method": "DELETE",
+    "path": "/products/4",
+    "status": 404,
+    "expectStatus": 404,
+    "ok": true,
+    "json": {
+      "error": "Produk dengan id 4 tidak ditemukan"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ]
+  },
+  {
+    "id": "S16",
+    "title": "DELETE dengan id tidak valid",
+    "method": "DELETE",
+    "path": "/products/-1",
+    "status": 400,
+    "expectStatus": 400,
+    "ok": true,
+    "json": {
+      "error": "Validasi gagal",
+      "details": [
+        "id harus berupa bilangan bulat positif"
+      ]
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ]
+  },
+  {
+    "id": "S17",
+    "title": "Uji restart — langkah 1: POST produk baru",
+    "method": "POST",
+    "path": "/products",
+    "body": {
+      "name": "Produk Uji Restart",
+      "price": 12345
+    },
+    "status": 201,
+    "expectStatus": 201,
+    "ok": true,
+    "json": {
+      "id": 5,
+      "name": "Produk Uji Restart",
+      "price": 12345,
+      "createdAt": "2026-11-07T13:37:19.131Z",
+      "updatedAt": "2026-11-07T13:37:19.131Z"
+    },
+    "before": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      }
+    ],
+    "after": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "created_at": "2026-11-07T13:37:18.472Z",
+        "updated_at": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 5,
+        "name": "Produk Uji Restart",
+        "price": 12345,
+        "created_at": "2026-11-07T13:37:19.131Z",
+        "updated_at": "2026-11-07T13:37:19.131Z"
+      }
+    ]
+  },
+  {
+    "id": "S18",
+    "title": "Uji restart — langkah 2: GET setelah server dimulai ulang",
+    "method": "GET",
+    "path": "/products",
+    "status": 200,
+    "expectStatus": 200,
+    "ok": true,
+    "json": [
+      {
+        "id": 1,
+        "name": "Buku Tulis",
+        "price": 5000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 2,
+        "name": "Pulpen",
+        "price": 3000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 3,
+        "name": "Spidol",
+        "price": 8000,
+        "createdAt": "2026-11-07T13:37:18.472Z",
+        "updatedAt": "2026-11-07T13:37:18.472Z"
+      },
+      {
+        "id": 5,
+        "name": "Produk Uji Restart",
+        "price": 12345,
+        "createdAt": "2026-11-07T13:37:19.131Z",
+        "updatedAt": "2026-11-07T13:37:19.131Z"
+      }
+    ],
+    "before": null,
+    "after": null
+  }
+]

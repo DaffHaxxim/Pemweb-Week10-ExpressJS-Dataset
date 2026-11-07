@@ -69,6 +69,8 @@ function render(s) {
   const lines = [
     `### ${s.id} — ${s.title}`,
     "",
+    `![${s.id}](evidence/${s.id}.png)`,
+    "",
     "**Request**",
     "```bash",
     curlOf(s),
@@ -244,12 +246,14 @@ Urutan operasi: data awal → POST → PUT → DELETE → POST produk uji → re
 
 ## 6. Catatan
 
-- Screenshot Postman/Bruno/Hoppscotch tidak dapat diambil dari lingkungan otomatis ini. Koleksi siap impor tersedia di
-  \`docs/postman_collection.json\` untuk melengkapi bukti tersebut; isi request/response di atas berasal dari server yang sama.
+- Gambar \`docs/evidence/Sxx.png\` adalah **render otomatis** (\`scripts/render-images.js\`) dari data request/response/database
+  yang direkam \`scripts/evidence.js\` saat server berjalan. Gambar tersebut bukan tangkapan layar Postman/Bruno/Hoppscotch.
+  Koleksi siap impor tersedia di \`docs/postman_collection.json\` bila pengajar mewajibkan tangkapan layar dari aplikasi tersebut.
 - Tes otomatis: \`npm test\` (27 pengujian, termasuk uji restart).
 `;
 
-await mkdir("docs", { recursive: true });
+await mkdir("docs/evidence", { recursive: true });
+await writeFile("docs/evidence/scenarios.json", JSON.stringify(steps, null, 2));
 await writeFile("docs/LAPORAN-PENGUJIAN.md", report);
 console.log(`\nLaporan ditulis ke docs/LAPORAN-PENGUJIAN.md — ${passed}/${steps.length} lulus`);
 process.exit(passed === steps.length && survived ? 0 : 1);
